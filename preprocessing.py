@@ -6,7 +6,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import make_column_selector, make_column_transformer
 from sklearn.pipeline import make_pipeline
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import cross_val_score, GridSearchCV
 from xgboost import XGBRegressor
 
 
@@ -69,6 +69,10 @@ test = test.drop(columns=["Url", "PropertyId"])
 train = remove_outliers_zscore(train, ["Price"])
 test = remove_outliers_zscore(test, ["Price"])
 
+train = train[train["Price"] > 0]
+test = test[test["Price"] > 0]
+
+
 # split features and target
 X_train, y_train = train.drop("Price", axis=1), train["Price"]
 X_test, y_test = test.drop("Price", axis=1), test["Price"]
@@ -91,7 +95,19 @@ preprocessor = make_column_transformer(
 )
 
 # pipeline
-pipe = make_pipeline(preprocessor, XGBRegressor())
+pipe = make_pipeline(
+    preprocessor,
+    XGBRegressor(
+        colsample_bytree=0.7,
+        learning_rate=0.03,
+        max_depth=10,
+        min_child_weight=4,
+        n_estimators=1000,
+        objective="reg:squarederror",
+        subsample=0.7,
+        random_state=42,
+    ),
+)
 
 # cross-validation
-print(cross_val_score(pipe, X_train, y_train).mean())
+print(cross_val_score(pipe, X_train, y_train, cv=10, scoring="r2").mean())
