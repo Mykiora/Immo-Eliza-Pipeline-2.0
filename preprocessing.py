@@ -11,6 +11,30 @@ from sklearn.model_selection import cross_val_score, GridSearchCV
 from xgboost import XGBRegressor
 
 
+def predict(property_data: dict):
+    """
+    Imports the model from a pickle file and make a prediction based on the given features.
+
+    Parameters :
+    - property_data : A dict containing the data about the property.
+
+    Format : ['Openfire' 'Furnished' 'Terrace' 'Garden' 'TypeOfProperty' 'PostalCode'
+            'SubtypeOfProperty' 'TypeOfSale' 'Kitchen' 'StateOfBuilding' 'Heating'
+            'Bedrooms' 'SurfaceOfGood' 'SwimmingPool' 'NumberOfFacades' 'LivingArea'
+            'ConstructionYear' 'GardenArea']
+
+    Returns :
+    - Predicted price (float number)
+    """
+    # Import model
+    with open("utils/pipeline.obj", "rb") as file:
+        pipeline = pickle.load(file)
+
+    features = pd.DataFrame(property_data, index=[0])
+
+    return pipeline.predict(features)[0]
+
+
 def check_missing_values(column: pd.Series) -> float:
     """
     Calculates the percentage of missing values in a given column.
@@ -72,7 +96,6 @@ test = remove_outliers_zscore(test, ["Price"])
 
 train = train[train["Price"] > 0]
 test = test[test["Price"] > 0]
-
 
 # split features and target
 X_train, y_train = train.drop("Price", axis=1), train["Price"]
