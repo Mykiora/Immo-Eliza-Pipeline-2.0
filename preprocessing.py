@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import json
+import pickle
 from scipy.stats import zscore
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
@@ -77,14 +78,6 @@ test = test[test["Price"] > 0]
 X_train, y_train = train.drop("Price", axis=1), train["Price"]
 X_test, y_test = test.drop("Price", axis=1), test["Price"]
 
-print(X_train["TypeOfProperty"].unique())
-print(X_train["SubtypeOfProperty"].unique())
-print(X_train["TypeOfSale"].unique())
-print(X_train["Kitchen"].unique())
-print(X_train["StateOfBuilding"].unique())
-print(X_train["Heating"].unique())
-
-
 # numeric columns
 num_imp = SimpleImputer(strategy="median", add_indicator=True)
 scaler = StandardScaler()
@@ -118,4 +111,9 @@ pipe = make_pipeline(
 )
 
 # cross-validation
-print(cross_val_score(pipe, X_train, y_train, cv=10, scoring="r2").mean())
+# print(cross_val_score(pipe, X_train, y_train, cv=10, scoring="r2").mean())
+
+# Optional : if the tests are done, uncomment the next three lines to save the final model
+"""pipe.fit(X_train, y_train)
+with open("utils/pipeline.obj", "wb") as file:
+    pickle.dump(pipe, file)"""
