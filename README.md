@@ -7,7 +7,7 @@ to improve the preprocessing quality and the model performance by including a pi
 
 ## Installation
 1. Make sure you have the latest version of Python installed
-2. If you are on Windows, you can just launch "start.bat". Otherwise, you can `cd` your way to the directory and run the command `pip install -r requirements.txt`, then start the program locally with `streamlit run interface.py`
+2.`cd` your way to the directory and run the command `pip install -r requirements.txt` to install the dependencies, then start the program locally with `streamlit run interface.py`
 3. That's all. You can now test the model.
 
 ## Pre-Pipeline
