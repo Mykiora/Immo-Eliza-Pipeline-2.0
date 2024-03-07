@@ -3,10 +3,16 @@ from preprocessing import predict
 import numpy as np
 
 
-def predict_request():
-    st.session_state.clicked = True
+def predict_request() -> None:
+    """
+    Set the session state "clicked" to True to activate the button, then stores
+    all the inputs in a dictionary and sends it to the "predict" function to get
+    a result.
 
-    print(postal_code)
+    Returns :
+    None
+    """
+    st.session_state.clicked = True
 
     property_type_map = {
         "house": 1,
