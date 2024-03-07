@@ -5,6 +5,11 @@ Immo-Eliza is a regression project that we had to do in the bootcamp. Provided w
 the goal was to build a Machine Learning model able to predict the prices of the properties. This project is an attempt
 to improve the preprocessing quality and the model performance by including a pipeline and using scikit-learn transformers.
 
+## Installation
+1. Make sure you have the latest version of Python installed
+2. If you are on Windows, you can just launch "start.bat". Otherwise, you can `cd` your way to the directory and run the command `pip install -r requirements.txt`, then start the program locally with `streamlit run interface.py`
+3. That's all. You can now test the model.
+
 ## Pre-Pipeline
 Before even entering the pipeline and going through the series of transformers, the initial modifications made on the data are
 the following :
@@ -34,3 +39,5 @@ R² Score : 0.7796745321037716
 - The power of a preprocessing pipeline and how to implement a neat one.
 - Perform cross validation directly on the pipeline.
 - When trying to fine tune the parameters of a model lying inside a pipeline, it is necessary to define the parameter as part of the Regressor. For example, instead of writing "learning_rate:" in the parameters dict, write "xgbregressor__learning_rate:".
+- Create a simple interface with Streamlit
+- In case of getting the error message "ValueError: If using all scalar values, you must pass an index" when creating a dataframe, pass the argument "index=[0]"
