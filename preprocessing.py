@@ -77,6 +77,14 @@ test = test[test["Price"] > 0]
 X_train, y_train = train.drop("Price", axis=1), train["Price"]
 X_test, y_test = test.drop("Price", axis=1), test["Price"]
 
+print(X_train["TypeOfProperty"].unique())
+print(X_train["SubtypeOfProperty"].unique())
+print(X_train["TypeOfSale"].unique())
+print(X_train["Kitchen"].unique())
+print(X_train["StateOfBuilding"].unique())
+print(X_train["Heating"].unique())
+
+
 # numeric columns
 num_imp = SimpleImputer(strategy="median", add_indicator=True)
 scaler = StandardScaler()
