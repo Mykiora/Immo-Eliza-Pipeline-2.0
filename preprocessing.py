@@ -32,7 +32,7 @@ def predict(property_data: dict):
 
     features = pd.DataFrame(property_data, index=[0])
 
-    return pipeline.predict(features)[0]
+    return round(pipeline.predict(features)[0], -5)
 
 
 def remove_outliers_zscore(df, columns, threshold=3):

@@ -108,4 +108,4 @@ if "clicked" not in st.session_state:
     st.session_state.clicked = False
 
 if st.session_state.clicked:
-    st.markdown(f"### Prediction : {st.session_state.prediction} €")
+    st.markdown(f"### Prediction : ≈{st.session_state.prediction} €")
