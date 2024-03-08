@@ -96,11 +96,11 @@ heating = st.selectbox(
 )
 
 # "True / False" fields
-openfire = st.selectbox("Openfire", ("True", "False"))
-furnished = st.selectbox("Furnished", ("True", "False"))
-terrace = st.selectbox("Terrace", ("True", "False"))
-garden = st.selectbox("Garden", ("True", "False"))
-pool = st.selectbox("Swimming Pool", ("True", "False"))
+openfire = st.checkbox("Openfire", value=False)
+furnished = st.checkbox("Furnished", value=True)
+terrace = st.checkbox("Terrace", value=False)
+garden = st.checkbox("Garden", value=False)
+pool = st.checkbox("Swimming Pool", value=False)
 
 st.button("Predict", on_click=predict_request)
 
