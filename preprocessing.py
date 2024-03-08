@@ -35,22 +35,6 @@ def predict(property_data: dict):
     return pipeline.predict(features)[0]
 
 
-def check_missing_values(column: pd.Series) -> float:
-    """
-    Calculates the percentage of missing values in a given column.
-
-    Parameters :
-    - df  : The DataFrame the function will work with.
-    - column : The column in which the percentage must be calculated.
-
-    Returns:
-    - Float number between 0 and 100
-    """
-    total_values = column.size
-    missing_values = column.isna().sum()
-    return round((missing_values / total_values) * 100, 2)
-
-
 def remove_outliers_zscore(df, columns, threshold=3):
     """
     Remove outliers from the specified columns of a DataFrame using z-score method.
